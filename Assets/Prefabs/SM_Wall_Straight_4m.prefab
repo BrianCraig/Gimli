@@ -101,6 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8121462884332608184}
+  - component: {fileID: 3050338381282034876}
   m_Layer: 0
   m_Name: SM_Wall_Straight_4m
   m_TagString: Untagged
@@ -124,3 +125,18 @@ Transform:
   - {fileID: 563656295466973170}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3050338381282034876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8993995829243272001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7547786bb5847d22eab532e3115a5ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VisibleTrigger
+  size: {x: 4, y: 3, z: 0.2}
+  origin: {x: -2, y: 1.5, z: -0.1}
+  triggered: 0
