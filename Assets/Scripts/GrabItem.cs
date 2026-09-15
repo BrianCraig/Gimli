@@ -16,7 +16,7 @@ public class GrabItem : MonoBehaviour
         depositLayer = LayerMask.GetMask("Deposit");
     }
 
-    void FixedUpdate()
+    void Update()
     {
         actionsText.text = "";
         var cam_transform = cam.transform;
@@ -28,7 +28,7 @@ public class GrabItem : MonoBehaviour
                 if (grabbable != null)
                 {
 
-                    if (interact.action.IsPressed())
+                    if (interact.action.WasPressedThisFrame())
                     {
                         grabbing = grabbable.Grab();
                         grabbing.SetParent(transform);
@@ -44,7 +44,22 @@ public class GrabItem : MonoBehaviour
         }
         else
         {
-
+            if (Physics.Raycast(cam_transform.position, cam_transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity, depositLayer))
+            {
+                var droppable = hit.transform.GetComponentInParent<IDroppable>();
+                if (droppable != null && droppable.CanDrop())
+                {
+                    if (interact.action.WasPressedThisFrame())
+                    {
+                        droppable.Drop(grabbing);
+                        grabbing = null;
+                    }
+                    else
+                    {
+                        actionsText.text = $"[{interact.action.GetBindingDisplayString()}] Drop";
+                    }
+                }
+            }
         }
     }
 
