@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 900286138264117293}
   - component: {fileID: 5953581091352294078}
   - component: {fileID: 8404643844387159098}
+  - component: {fileID: 5279697339596173004}
   m_Layer: 0
   m_Name: SM_Wall_Reinforced_4m
   m_TagString: Untagged
@@ -93,6 +94,27 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5279697339596173004
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756186753764565297}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.04, y: 0.0030000007, z: 0.030000007}
+  m_Center: {x: -0.02, y: 0.00050000014, z: 0.015000003}
 --- !u!1 &6601414530266997690
 GameObject:
   m_ObjectHideFlags: 0

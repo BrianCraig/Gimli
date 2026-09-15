@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 563656295466973170}
   - component: {fileID: 4261928218440228265}
   - component: {fileID: 6739012163162467518}
+  - component: {fileID: 7398949739182805851}
   m_Layer: 0
   m_Name: SM_Wall_Straight_4m
   m_TagString: Untagged
@@ -92,6 +93,27 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7398949739182805851
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3545195951937645659}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.04, y: 0.0020000006, z: 0.030000007}
+  m_Center: {x: -0.02, y: 0.001, z: 0.015}
 --- !u!1 &8993995829243272001
 GameObject:
   m_ObjectHideFlags: 0
