@@ -1,28 +1,55 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GrabItem : MonoBehaviour
 {
-    LayerMask layerMask;
+    LayerMask grabLayer, depositLayer;
     public GameObject cam;
+    private Transform grabbing;
+    [SerializeField] InputActionReference interact;
+    [SerializeField] TextMeshPro actionsText;
 
     void Awake()
     {
-        layerMask = LayerMask.GetMask("Object");
+        grabLayer = LayerMask.GetMask("Grab");
+        depositLayer = LayerMask.GetMask("Deposit");
     }
 
     void FixedUpdate()
     {
+        actionsText.text = "";
         var cam_transform = cam.transform;
-        if (Physics.Raycast(cam_transform.position, cam_transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity, layerMask))
+        if (EmptyHanded())
         {
-            var grabbable = hit.transform.GetComponentInParent<IGrabbable>();
-            if (grabbable != null)
+            if (Physics.Raycast(cam_transform.position, cam_transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity, grabLayer))
             {
-                var obj_transform = grabbable.Grab();
-                obj_transform.SetParent(transform);
-                obj_transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-                obj_transform.localScale = Vector3.one;
+                var grabbable = hit.transform.GetComponentInParent<IGrabbable>();
+                if (grabbable != null)
+                {
+
+                    if (interact.action.IsPressed())
+                    {
+                        grabbing = grabbable.Grab();
+                        grabbing.SetParent(transform);
+                        grabbing.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+                        grabbing.localScale = Vector3.one;
+                    }
+                    else
+                    {
+                        actionsText.text = $"[{interact.action.GetBindingDisplayString()}] Grab";
+                    }
+                }
             }
         }
+        else
+        {
+
+        }
+    }
+
+    bool EmptyHanded()
+    {
+        return grabbing == null;
     }
 }
