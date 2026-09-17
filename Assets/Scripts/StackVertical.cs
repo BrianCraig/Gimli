@@ -36,7 +36,9 @@ public class StackVertical : MonoBehaviour, IDroppable, IGrabbable
 
     void OnValidate()
     {
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.delayCall += Regenerate;
+#endif
     }
 
     void Regenerate()
@@ -55,6 +57,10 @@ public class StackVertical : MonoBehaviour, IDroppable, IGrabbable
             instance.transform.GetChild(0).GetComponent<MeshFilter>().mesh = item.mesh;
             instance.transform.GetChild(0).GetComponent<MeshRenderer>().materials = item.materials;
         }
+
+        var radius = item.radius();
+        GetComponent<BoxCollider>().center = new Vector3(0f, max_height / 2f, 0f);
+        GetComponent<BoxCollider>().size = new Vector3(radius * 2, max_height, radius * 2);
     }
 
 

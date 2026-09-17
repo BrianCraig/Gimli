@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a808753dec8b3d88ac21e0fe72c4e94, type: 3}
-  m_Name: bun-bottom
+  m_Name: cheese
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  mesh: {fileID: 1900122667102271213, guid: 6f9c69a2c1d3f54b9af3dd5d53060562, type: 3}
+  mesh: {fileID: -2719439086681959747, guid: 6f9c69a2c1d3f54b9af3dd5d53060562, type: 3}
   materials:
-  - {fileID: 2100000, guid: 614c114347351749d89654fa105e8f80, type: 2}
+  - {fileID: 2100000, guid: 8e447bca5ecd6a04d9a70d14c55f0961, type: 2}
   distance: 0.02
