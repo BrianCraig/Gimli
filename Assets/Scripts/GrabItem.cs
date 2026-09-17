@@ -51,7 +51,7 @@ public class GrabItem : MonoBehaviour
                 {
                     if (interact.action.WasPressedThisFrame())
                     {
-                        droppable.Drop(grabbing);
+                        droppable.Drop(grabbing, hit.point);
                         grabbing = null;
                     }
                     else

@@ -7,7 +7,7 @@ public class DropItem : MonoBehaviour, IDroppable
         return true;
     }
 
-    public void Drop(Transform incoming_transform)
+    public void Drop(Transform incoming_transform, Vector3 _)
     {
         incoming_transform.SetParent(transform);
         incoming_transform.SetLocalPositionAndRotation(Vector3.zero, new Quaternion(-0.181592122f, -0.144707561f, 0.0379015729f, 0.971929789f));
