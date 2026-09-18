@@ -69,10 +69,11 @@ public class StackVertical : MonoBehaviour, IDroppable, IGrabbable
         var radius = item.radius();
         Gizmos.DrawWireCube(new Vector3(0, height / 2f, 0), new Vector3(radius * 2, height, radius * 2));
     }
+#endif
 
     public bool Drop(Vector3 hitpoint, ItemData incoming_item)
     {
-        if(incoming_item == item && amount < max_amount)
+        if (incoming_item == item && amount < max_amount)
         {
             amount++;
             Regenerate();
@@ -80,5 +81,4 @@ public class StackVertical : MonoBehaviour, IDroppable, IGrabbable
         }
         return false;
     }
-#endif
 }
