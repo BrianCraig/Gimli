@@ -9,19 +9,15 @@ public class StackVertical : MonoBehaviour, IDroppable, IGrabbable
     public int amount = 3;
     public GameObject base_prefab;
 
-    bool IDroppable.CanDrop()
+    ItemData IGrabbable.Grab()
     {
-        return false;
-    }
-
-    void IDroppable.Drop(Transform transform, Vector3 hitpoint)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    Transform IGrabbable.Grab()
-    {
-        throw new System.NotImplementedException();
+        if (amount > 0)
+        {
+            amount -= 1;
+            Regenerate();
+            return item;
+        }
+        return null;
     }
 
     void Start()
@@ -72,6 +68,17 @@ public class StackVertical : MonoBehaviour, IDroppable, IGrabbable
         var height = Math.Min(max_height, max_amount * (item.height() + .04f));
         var radius = item.radius();
         Gizmos.DrawWireCube(new Vector3(0, height / 2f, 0), new Vector3(radius * 2, height, radius * 2));
+    }
+
+    public bool Drop(Vector3 hitpoint, ItemData incoming_item)
+    {
+        if(incoming_item == item && amount < max_amount)
+        {
+            amount++;
+            Regenerate();
+            return true;
+        }
+        return false;
     }
 #endif
 }

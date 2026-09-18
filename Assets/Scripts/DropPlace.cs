@@ -1,16 +1,32 @@
 using UnityEngine;
 
-public class DropItem : MonoBehaviour, IDroppable
+public class DropItem : MonoBehaviour, IDroppable, IGrabbable
 {
-    public bool CanDrop()
+    private ItemData item = null;
+
+    public ItemData Grab()
     {
-        return true;
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(transform.GetChild(i).gameObject);
+        }
+        var current_item = item;
+        item = null;
+        return current_item;
     }
 
-    public void Drop(Transform incoming_transform, Vector3 _)
+    bool IDroppable.Drop(Vector3 hitpoint, ItemData incoming_item)
     {
-        incoming_transform.SetParent(transform);
-        incoming_transform.SetLocalPositionAndRotation(Vector3.zero, new Quaternion(-0.181592122f, -0.144707561f, 0.0379015729f, 0.971929789f));
-        incoming_transform.localScale = new Vector3(0.460830003f,0.460830003f,0.460830003f);
+        if (item != null)
+        {
+            return false;
+        }
+        item = incoming_item;
+        var instance = Instantiate(Game.base_prefab, transform);
+        instance.transform.GetChild(0).GetComponent<MeshFilter>().mesh = item.mesh;
+        instance.transform.GetChild(0).GetComponent<MeshRenderer>().materials = item.materials;
+        instance.transform.SetLocalPositionAndRotation(Vector3.zero, new Quaternion(-0.181592122f, -0.144707561f, 0.0379015729f, 0.971929789f));
+        instance.transform.localScale = new Vector3(0.460830003f, 0.460830003f, 0.460830003f);
+        return true;
     }
 }

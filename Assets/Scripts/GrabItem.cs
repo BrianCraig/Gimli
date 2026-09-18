@@ -4,25 +4,26 @@ using UnityEngine.InputSystem;
 
 public class GrabItem : MonoBehaviour
 {
-    LayerMask grabLayer, depositLayer;
+    LayerMask grabLayer;
     public GameObject cam;
-    private Transform grabbing;
+    private ItemData grabbing;
     [SerializeField] InputActionReference interact;
     [SerializeField] TextMeshPro actionsText;
 
     void Awake()
     {
         grabLayer = LayerMask.GetMask("Grab");
-        depositLayer = LayerMask.GetMask("Deposit");
     }
 
     void Update()
     {
         actionsText.text = "";
         var cam_transform = cam.transform;
-        if (EmptyHanded())
+
+
+        if (Physics.Raycast(cam_transform.position, cam_transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity, grabLayer))
         {
-            if (Physics.Raycast(cam_transform.position, cam_transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity, grabLayer))
+            if (EmptyHanded())
             {
                 var grabbable = hit.transform.GetComponentInParent<IGrabbable>();
                 if (grabbable != null)
@@ -30,10 +31,16 @@ public class GrabItem : MonoBehaviour
 
                     if (interact.action.WasPressedThisFrame())
                     {
-                        grabbing = grabbable.Grab();
-                        grabbing.SetParent(transform);
-                        grabbing.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-                        grabbing.localScale = Vector3.one;
+                        var item = grabbable.Grab();
+                        if (item != null)
+                        {
+                            var instance = Instantiate(Game.base_prefab, transform);
+                            instance.transform.GetChild(0).GetComponent<MeshFilter>().mesh = item.mesh;
+                            instance.transform.GetChild(0).GetComponent<MeshRenderer>().materials = item.materials;
+                            instance.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+                            instance.transform.localScale = Vector3.one;
+                            grabbing = item;
+                        }
                     }
                     else
                     {
@@ -41,18 +48,21 @@ public class GrabItem : MonoBehaviour
                     }
                 }
             }
-        }
-        else
-        {
-            if (Physics.Raycast(cam_transform.position, cam_transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity, depositLayer))
+            else
             {
                 var droppable = hit.transform.GetComponentInParent<IDroppable>();
-                if (droppable != null && droppable.CanDrop())
+                if (droppable != null)
                 {
                     if (interact.action.WasPressedThisFrame())
                     {
-                        droppable.Drop(grabbing, hit.point);
-                        grabbing = null;
+                        if (droppable.Drop(hit.point, grabbing))
+                        {
+                            grabbing = null;
+                            for (int i = transform.childCount - 1; i >= 0; i--)
+                            {
+                                DestroyImmediate(transform.GetChild(i).gameObject);
+                            }
+                        }
                     }
                     else
                     {
@@ -60,8 +70,10 @@ public class GrabItem : MonoBehaviour
                     }
                 }
             }
+
         }
     }
+
 
     bool EmptyHanded()
     {

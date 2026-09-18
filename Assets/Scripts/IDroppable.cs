@@ -2,6 +2,10 @@ using UnityEngine;
 
 public interface IDroppable
 {
-    public bool CanDrop();
-    public void Drop(Transform transform, Vector3 hitpoint);
+    /// <summary>
+    /// Possibly drops an item, returns false if it can't be dropped.
+    /// </summary>
+    /// <param name="hitpoint">the collided world vec3 hit</param>
+    /// <param name="item">the item to be dropped</param>
+    public bool Drop(Vector3 hitpoint, ItemData item);
 }
