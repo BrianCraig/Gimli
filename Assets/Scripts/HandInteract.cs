@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GrabItem : MonoBehaviour
+public class HandInteract : MonoBehaviour
 {
     LayerMask grabLayer;
     public GameObject cam;
@@ -25,13 +25,13 @@ public class GrabItem : MonoBehaviour
         {
             if (EmptyHanded())
             {
-                var grabbable = hit.transform.GetComponentInParent<IGrabbable>();
+                var grabbable = hit.transform.GetComponentInParent<IRelease>();
                 if (grabbable != null)
                 {
 
                     if (interact.action.WasPressedThisFrame())
                     {
-                        var item = grabbable.Grab();
+                        var item = grabbable.Release();
                         if (item != null)
                         {
                             var instance = Instantiate(Game.base_prefab, transform);
@@ -50,7 +50,7 @@ public class GrabItem : MonoBehaviour
             }
             else
             {
-                var droppable = hit.transform.GetComponentInParent<IDroppable>();
+                var droppable = hit.transform.GetComponentInParent<IDrop>();
                 if (droppable != null)
                 {
                     if (interact.action.WasPressedThisFrame())

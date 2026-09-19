@@ -6,7 +6,6 @@ public class ItemData : ScriptableObject
 {
     public Mesh mesh;
     public Material[] materials;
-    public float distance = 0.02f;
 
     public float height()
     {

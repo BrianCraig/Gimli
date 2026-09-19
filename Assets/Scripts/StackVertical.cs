@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class StackVertical : MonoBehaviour, IDroppable, IGrabbable
+public class StackVertical : MonoBehaviour, IDrop, IRelease
 {
     public ItemData item;
     public int max_amount = 10;
@@ -9,7 +9,7 @@ public class StackVertical : MonoBehaviour, IDroppable, IGrabbable
     public int amount = 3;
     public GameObject base_prefab;
 
-    ItemData IGrabbable.Grab()
+    ItemData IRelease.Release()
     {
         if (amount > 0)
         {

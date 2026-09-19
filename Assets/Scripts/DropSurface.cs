@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DropSurface : MonoBehaviour, IDroppable
+public class DropSurface : MonoBehaviour, IDrop
 {
     public bool Drop(Vector3 hitpoint, ItemData item)
     {

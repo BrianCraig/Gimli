@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IDroppable
+public interface IDrop
 {
     /// <summary>
     /// Possibly drops an item, returns false if it can't be dropped.
