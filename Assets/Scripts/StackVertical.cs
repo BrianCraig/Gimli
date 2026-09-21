@@ -52,6 +52,7 @@ public class StackVertical : MonoBehaviour, IDrop, IRelease
             instance.transform.SetLocalPositionAndRotation(new Vector3(0f, (height + .04f) * i, 0f), Quaternion.identity);
             instance.transform.GetChild(0).GetComponent<MeshFilter>().mesh = item.mesh;
             instance.transform.GetChild(0).GetComponent<MeshRenderer>().materials = item.materials;
+            instance.hideFlags = HideFlags.DontSave;
         }
 
         var radius = item.radius();
