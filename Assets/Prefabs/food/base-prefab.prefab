@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4574466536543718172}
   - component: {fileID: 7575407081726466309}
   - component: {fileID: 4940243505397790875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1012719774782955328}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: base-prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

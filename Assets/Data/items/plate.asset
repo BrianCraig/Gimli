@@ -15,4 +15,4 @@ MonoBehaviour:
   mesh: {fileID: 808474172911093344, guid: 6f9c69a2c1d3f54b9af3dd5d53060562, type: 3}
   materials:
   - {fileID: 2100000, guid: f6fd7537a152a9b4eb2a2f30ddc2f058, type: 2}
-  distance: 0.02
+  onReleaseOverride: {fileID: 11500000, guid: 481372175072ea4dc873849d4ab6f03d, type: 3}

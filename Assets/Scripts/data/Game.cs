@@ -32,6 +32,15 @@ public class Game : ScriptableObject
             var height = item.height();
             bc.center = new Vector3(0f, height / 2f, 0f);
             bc.size = new Vector3(radius * 2, height, radius * 2);
+
+            if (item.onReleaseOverride != null)
+            {
+                instance.AddComponent(item.onReleaseOverride.GetClass());
+            }
+            else
+            {
+                instance.AddComponent<ItemRelease>().Initialize(item);
+            }
         }
         return instance;
     }
